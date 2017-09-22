@@ -13,7 +13,7 @@
   - name: Do a vagrant init
     command: vagrant init ubuntu/trusty32
     args: 
-      chdir: node
+      chdir: node/
 
 
   - name: Edit the Vagrantfile
