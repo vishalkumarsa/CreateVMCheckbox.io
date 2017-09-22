@@ -5,8 +5,9 @@
   tasks:
   - name: create a directory
     file: 
-      path: node
+      path: /home/vagrant/node
       state: directory  
+      recurse: yes
     
 
   - name: Do a vagrant init
