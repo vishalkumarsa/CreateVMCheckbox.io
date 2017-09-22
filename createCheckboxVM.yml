@@ -1,6 +1,7 @@
 - hosts: localhost
   gather_facts: no
-  become_user: root
+  become: yes
+  become_user: vagrant
   tasks:
   - name: create a directory
     file: 
