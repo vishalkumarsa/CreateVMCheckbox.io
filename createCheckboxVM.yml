@@ -3,6 +3,13 @@
   
   become_user: vagrant
   tasks:
+  - name: Download vagrant
+    get_url:
+      url: "https://releases.hashicorp.com/vagrant/1.9.8/vagrant_1.9.8_x86_64.deb"
+      dest: .
+
+  - name: Install vagrant
+    shell: dpkg -i vagrant_1.9.8_x86_64.deb
 
    
   - name: Do a vagrant init
