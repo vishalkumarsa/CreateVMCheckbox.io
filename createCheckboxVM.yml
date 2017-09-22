@@ -13,7 +13,7 @@
   - name: Do a vagrant init
     command: vagrant init ubuntu/trusty32
     args: 
-      chdir: /var/lib/jenkins/workspace/provision\ checkbox.io/node
+      chdir: /var/lib/jenkins/workspace/provision checkbox.io/node
 
 
   - name: Edit the Vagrantfile
