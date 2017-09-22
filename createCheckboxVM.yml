@@ -2,15 +2,9 @@
   gather_facts: no
 
   tasks:
-  - name: Download vagrant
-    become: yes
-    get_url:
-      url: "https://releases.hashicorp.com/vagrant/1.9.8/vagrant_1.9.8_x86_64.deb"
-      dest: .
-      
-
-  - name: Install vagrant
-    shell: dpkg -i vagrant_1.9.8_x86_64.deb
+  - name: install vagrant from deb
+    apt:
+      deb: https://releases.hashicorp.com/vagrant/1.9.8/vagrant_1.9.8_x86_64.deb?_ga=2.127681869.1728430659.1504721252-1913439545.1503595309
 
    
   - name: Do a vagrant init
