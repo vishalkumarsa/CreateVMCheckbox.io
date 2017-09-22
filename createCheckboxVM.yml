@@ -5,7 +5,7 @@
   tasks:
   - name: create a directory
     file: 
-      path: /home/vagrant/node
+      path: node
       state: directory  
       recurse: yes
     
@@ -13,7 +13,7 @@
   - name: Do a vagrant init
     command: vagrant init ubuntu/trusty32
     args: 
-      chdir: /home/vagrant/node
+      chdir: node
 
 
   - name: Edit the Vagrantfile
