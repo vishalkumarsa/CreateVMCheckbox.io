@@ -2,6 +2,37 @@
   gather_facts: no
 
   tasks:
+  - name: Add oracle VB official repository
+    lineinfile: 
+      path: /etc/apt/sources.list
+      line: "deb http://download.virtualbox.org/virtualbox/debian trusty contrib"
+      
+
+  - name: adding key
+    apt_key: 
+      url: "https://www.virtualbox.org/download/oracle_vbox_2016.asc" 
+      state: present
+  - name: adding another key
+    apt_key: 
+      url: "https://www.virtualbox.org/download/oracle_vbox.asc"
+      state: present
+
+  - name: update
+    apt:
+      update_cache: yes
+
+  - name: Install virtualbox
+    apt:
+      name: virtualbox-5.0
+
+
+  - name: Add users to virtualbox
+    shell: usermod -aG vboxusers $USER
+
+  - name: status vbox
+    service: 
+      name: vboxdrv
+      state: started
   - name: install vagrant from deb
     apt:
       deb: https://releases.hashicorp.com/vagrant/1.9.8/vagrant_1.9.8_x86_64.deb?_ga=2.127681869.1728430659.1504721252-1913439545.1503595309
