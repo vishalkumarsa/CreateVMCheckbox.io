@@ -1,13 +1,13 @@
 - hosts: localhost
   gather_facts: no
-  become: yes
+  
   become_user: vagrant
   tasks:
   - name: create a directory
     file: 
       path: /home/vagrant/node
       state: directory  
-    sudo: yes
+    
 
   - name: Do a vagrant init
     command: vagrant init ubuntu/trusty32
