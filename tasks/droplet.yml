@@ -1,4 +1,5 @@
 - name: Deploy public key
+  become: true
   digital_ocean: >
     state=present
     command=ssh
