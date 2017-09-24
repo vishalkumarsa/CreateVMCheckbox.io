@@ -7,7 +7,7 @@
 
 - name: Install dopy and six
   pip:
-    name: {{items}}
+    name: {{item}}
   with_items:
     - dopy
     - six
