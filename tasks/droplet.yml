@@ -1,23 +1,4 @@
-- name: Install pip
-  become: yes
-  apt: 
-    name: python-pip
-    state: present
 
-- name: Update six
-  become: yes
-  pip: 
-    name: six
-    version: 1.11.0
-    executable: pip
-    
-- name: Install dopy
-  become: yes
-  pip: 
-    name: dopy
-    version: 0.3.2
-    executable: pip
-    
 - name: Getting public key
   command: cat /var/lib/jenkins/.ssh/id_rsa.pub
   register: public_key
