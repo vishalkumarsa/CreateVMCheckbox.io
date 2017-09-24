@@ -4,10 +4,18 @@
     name: python3-pip
     state: present
 
+- name: Update six
+  become: yes
+  pip: 
+    name: six
+    version: 1.11.0
+    executable: pip3
+    
 - name: Install dopy
   become: yes
   pip: 
     name: dopy
+    version: 1.0.4
     executable: pip3
     
 - name: Deploy public key
