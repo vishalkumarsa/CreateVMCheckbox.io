@@ -15,7 +15,7 @@
   become: yes
   pip: 
     name: dopy
-    version: 1.0.4
+    version: 0.3.7
     executable: pip3
     
 - name: Deploy public key
