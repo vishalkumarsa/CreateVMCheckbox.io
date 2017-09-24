@@ -5,13 +5,14 @@
     name: python-pip
     state: present
 
-- name: Install dopy and six
+- name: Install dopy
   pip:
-    name: {{item}}
-  with_items:
-    - dopy
-    - six
-  
+    name: dopy
+
+- name: Install six
+  pip:
+    name: six
+    
 - name: Upgrade pip module dopy
   become: yes
   command: pip install dopy --upgrade
