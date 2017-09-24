@@ -34,7 +34,7 @@
     ssh_pub_key= "{{public_key.stdout}}"
   register: do_droplet
      
-- name: Create Digital Ocean droplet 512Mb/Ubuntu12.04 LTS/Amsterdam
+- name: Create Digital Ocean droplet 512Mb/Ubuntu16.04 LTS/Amsterdam
   digital_ocean: >   
     state=present
     command=droplet
