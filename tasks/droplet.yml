@@ -1,4 +1,25 @@
 
+- name: Install pip
+  become: yes
+  apt: 
+    name: python-pip
+    state: present
+
+- name: Install dopy and six
+  pip:
+    name: {{items}}
+  with_items:
+    - dopy
+    - six
+  
+- name: Upgrade pip module dopy
+  become: yes
+  command: pip install dopy --upgrade
+  
+- name: Upgrade pip module six
+  become: yes
+  command: pip install six --upgrade
+
 - name: Getting public key
   command: cat /var/lib/jenkins/.ssh/id_rsa.pub
   register: public_key
