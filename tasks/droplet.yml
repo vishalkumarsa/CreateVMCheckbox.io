@@ -1,9 +1,11 @@
 - name: Install pip
+  become: yes
   apt: 
     name: python3-pip
     state: present
 
 - name: Install dopy
+  become: yes
   pip: 
     name: dopy
     executable: pip3
