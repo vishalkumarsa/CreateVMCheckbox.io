@@ -11,7 +11,7 @@
 - name: Check if vagrant box is already present
   shell: '[ -f Vagrantfile ] && echo "File exist" || echo "File does not exist"'
   args:
-    chdir: "{{ansible_env.HOME}}"/devops_m1/checkbox_vm
+    chdir: "{{ansible_env.HOME}}/devops_m1/checkbox_vm"
   register: file_exist
    
 
@@ -32,21 +32,21 @@
   when: file_exist.stdout == "File exist"
 
 - name: create directory for key
-  file: path="{{ansible_env.HOME}}"/devops_m1/checkbox_vm/keys state=directory
+  file: path="{{ansible_env.HOME}}/devops_m1/checkbox_vm/keys" state=directory
 
 - name: set ssh key for checkbox vm
   copy: 
-    src: "{{ansible_env.HOME}}"/checkbox_vm/.vagrant/machines/default/virtualbox/private_key
-    dest: "{{ansible_env.HOME}}"/devops_m1/checkbox_vm/keys/checkbox_vm.key
+    src: "{{ansible_env.HOME}}/checkbox_vm/.vagrant/machines/default/virtualbox/private_key"
+    dest: "{{ansible_env.HOME}}/devops_m1/checkbox_vm/keys/checkbox_vm.key"
     mode: 0600
 
 - name: create checkbox inventory file
-  file: path="{{ansible_env.HOME}}"/devops_m1/checkbox_vm/inventory state=touch
+  file: path="{{ansible_env.HOME}}/devops_m1/checkbox_vm/inventory" state=touch
 
 - name: write contents in the inventory file
   blockinfile:
-    path: "{{ansible_env.HOME}}"/devops_m1/checkbox_vm/inventory 
+    path: "{{ansible_env.HOME}}/devops_m1/checkbox_vm/inventory" 
     block: |
       [nodes]
-      192.168.33.10 ansible_ssh_user=vagrant ansible_ssh_private_key_file="{{ansible_env.HOME}}"/devops_m1/checkbox_vm/keys/checkbox_vm.key
+      192.168.33.10 ansible_ssh_user=vagrant ansible_ssh_private_key_file="{{ansible_env.HOME}}/devops_m1/checkbox_vm/keys/checkbox_vm.key"
 
