@@ -70,21 +70,21 @@
      debug:
        msg: "{{output.stdout}}"
    
-  - name: Configure nginx defaults 
-    copy:
-      src: /home/vagrant/checkbox.io/local-conf/default
-      dest: /etc/nginx/sites-available/default
-      force: yes
-      remote_src: True
-    #when: first_run|changed 
+   - name: Configure nginx defaults 
+     copy:
+       src: /home/vagrant/checkbox.io/local-conf/default
+       dest: /etc/nginx/sites-available/default
+       force: yes
+       remote_src: True
+     #when: first_run|changed 
 
-  - name: configure nginx conf
-    copy:
-      src: /home/vagrant/checkbox.io/local-conf/nginx.conf
-      dest: /etc/nginx/nginx.conf
-      force: yes
-      remote_src: True
-    #when: first_run|changed
+   - name: configure nginx conf
+     copy:
+       src: /home/vagrant/checkbox.io/local-conf/nginx.conf
+       dest: /etc/nginx/nginx.conf
+       force: yes
+       remote_src: True
+     #when: first_run|changed
     
    - name: Service nginx restart
      service: name=nginx state=restarted
