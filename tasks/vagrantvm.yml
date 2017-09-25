@@ -33,6 +33,7 @@
 
 - name: create directory for key
   file: path="/home/kichoo/devops_m1/checkbox_vm/keys" state=directory
+  become: yes
 
 - name: set ssh key for checkbox vm
   copy: 
