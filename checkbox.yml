@@ -46,7 +46,7 @@
      
    - name: Add users to mongodb database
      mongodb_user:
-       login_host=127.0.0.1
+       login_host: 127.0.0.1
        database: admin
        name: admin
        password: pass123
