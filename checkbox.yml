@@ -7,7 +7,7 @@
        state: present
    
    - name: Add Java repository
-       apt_repository: repo='ppa:webupd8team/java' state=present update_cache=yes 
+     apt_repository: repo='ppa:webupd8team/java' state=present update_cache=yes 
      become: true
    
    - name: update
