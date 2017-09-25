@@ -30,7 +30,7 @@
   blockinfile:
     path: Vagrantfile
     block: |
-        config.vm.network "private_network", ip: "192.168.33.10"
+      config.vm.network "private_network", ip: "192.168.33.10"
       end
   when: file_exist.stdout == "File does not exist"
 
