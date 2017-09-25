@@ -35,19 +35,20 @@
   file: path="/home/kichoo/devops_m1/checkbox_vm/keys" state=directory
   become: yes
 
-- name: set ssh key for checkbox vm
-  copy: 
-    src: "/home/kichoo/checkbox_vm/.vagrant/machines/default/virtualbox/private_key"
-    dest: "/home/kichoo/devops_m1/checkbox_vm/keys/checkbox_vm.key"
-    mode: 0600
-  sudo: yes
-  sudo_user: root
+#- name: set ssh key for checkbox vm
+  #copy: 
+    #src: /home/kichoo/checkbox_vm/.vagrant/machines/default/virtualbox/private_key
+    #dest: /home/kichoo/devops_m1/checkbox_vm/keys/checkbox_vm.key
+    #mode: 0600
+  #sudo: yes
+  #sudo_user: root
 
 - name: create checkbox inventory file
   file: path="/home/kichoo/devops_m1/checkbox_vm/inventory" state=touch
   become: yes
 
 - name: write contents in the inventory file
+  become: yes
   blockinfile:
     path: "/home/kichoo/devops_m1/checkbox_vm/inventory" 
     block: |
