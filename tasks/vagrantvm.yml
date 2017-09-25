@@ -51,21 +51,21 @@
   file: path="/home/kichoo/devops_m1/checkbox_vm/keys" state=directory
   become: yes
 
-- name: set ssh key for checkbox vm
-  command: cat /home/kichoo/checkbox_vm/.vagrant/machines/default/virtualbox/private_key
-  register: pub_file
+#- name: set ssh key for checkbox vm
+#  command: cat /home/kichoo/checkbox_vm/.vagrant/machines/default/virtualbox/private_key
+#  register: pub_file
     #dest: /home/kichoo/devops_m1/checkbox_vm/keys/checkbox_vm.key
     #mode: 0600
-  become: yes
-  become_user: root
+#  become: yes
+#  become_user: root
   
-- name: creating key
-  file: path=/home/kichoo/devops_m1/checkbox_vm/keys/checkbox_vm.key mode=0600 state=touch
-  become: yes
-  become_user: jenkins
+#- name: creating key
+#  file: path=/home/kichoo/devops_m1/checkbox_vm/keys/checkbox_vm.key mode=0600 state=touch
+#  become: yes
+#  become_user: jenkins
   
-- name: Debug
-  debug: msg="{{ pub_file.stdout }}"
+#- name: Debug
+#  debug: msg="{{ pub_file.stdout }}"
   
 #- name: creating key
 #  lineinfile: path=/home/kichoo/devops_m1/checkbox_vm/keys/checkbox_vm.key
@@ -73,15 +73,15 @@
 #  become: yes
 #  become_user: jenkins
   
-- name: create checkbox inventory file
-  file: path="/home/kichoo/devops_m1/CreateVMCheckbox.io/inventory" state=touch
-  become: yes
+#- name: create checkbox inventory file
+#  file: path="/home/kichoo/devops_m1/CreateVMCheckbox.io/inventory" state=touch
+#  become: yes
 
-- name: write contents in the inventory file
-  become: yes
-  blockinfile:
-    path: "/home/kichoo/devops_m1/CreateVMCheckbox.io/inventory" 
-    block: |
-      [nodes]
-      192.168.33.10 ansible_ssh_user=vagrant ansible_ssh_private_key_file=/home/kichoo/devops_m1/checkbox_vm/keys/checkbox_vm.key
+#- name: write contents in the inventory file
+#  become: yes
+#  blockinfile:
+#    path: "/home/kichoo/devops_m1/CreateVMCheckbox.io/inventory" 
+#    block: |
+#      [nodes]
+#      192.168.33.10 ansible_ssh_user=vagrant ansible_ssh_private_key_file=/home/kichoo/devops_m1/checkbox_vm/keys/checkbox_vm.key
 
