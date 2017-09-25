@@ -35,12 +35,7 @@
   add_host: >
     name="{{ do_droplet.droplet.ip_address }}"
     groups=newdroplets
-    ansible_python_interpreter=/usr/bin/python3
-    
-- name: Add new droplet to known__hosts
-  known_hosts:
-    path: /var/lib/jenkins/.ssh/known_hosts
-    name: "{{ do_droplet.droplet.ip_address }}"
+    ansible_python_interpreter=/usr/bin/python3 
     
 - name: Wait for VM to come up
   local_action: wait_for host="{{ do_droplet.droplet.ip_address }}" state=started
