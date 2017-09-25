@@ -5,26 +5,62 @@
      apt:
        name: git
        state: present
-    
+   
+   - name: Add Java repository
+       apt_repository: repo='ppa:webupd8team/java' state=present update_cache=yes 
+     become: true
+   
    - name: update
      apt:
        update_cache: yes
+
+   - name: Add license for java
+       debconf: name='oracle-java8-installer' question='shared/accepted-oracle-license-v1-1' value=true vtype=select
+     become: true
+
+   - name: Install java
+       apt: name={{item}} state=present
+     with_items:
+      - oracle-java8-installer
+      - oracle-java8-set-default
+     become: true
+
+   - name: Install ca-certificates
+     apt: name=ca-certificates state=present
+     become: true
     
-   - name: Install nodejs
+   - name: Install additional packages
      apt:
-       name: nodejs-legacy
+       name: {{item}}
        state: present
-        
-   - name: Install npm
-     apt:
-       name: npm
-       state: present
-    
+     with_items:
+      - nginx
+      - npm
+      - mongodb
+      - nodejs
+      - python-pip
+      - maven
+   
+   - name: Install pymongo
+     pip: name=pymongo state=present
+     
+   #- name: Add users to mongodb database
+     #mongodb_user:
+       #login_host=127.0.0.1
+       #database: admin
+       #name: admin
+       #password: pass123
+       #login_port:8080
+       #roles: readWrite,dbAdmin
+       #state: present
+     
    - name: Download git repo
      command: git clone https://github.com/vishalkumarsa/checkbox.io
     
-   - name: npm install
-     command: chdir=/root/checkbox.io/server-side/site npm install
+   - name: npm install step
+     npm: path=/home/vagrant/checkbox.io/server-side/site
+     register: npm_complete
+     become: yes
        
    - name: pwd
      command: node -v
@@ -33,9 +69,28 @@
    - name: debug
      debug:
        msg: "{{output.stdout}}"
+   
+  - name: Configure nginx defaults 
+    copy:
+      src: /home/vagrant/checkbox.io/local-conf/default
+      dest: /etc/nginx/sites-available/default
+      force: yes
+      remote_src: True
+    #when: first_run|changed 
+
+  - name: configure nginx conf
+    copy:
+      src: /home/vagrant/checkbox.io/local-conf/nginx.conf
+      dest: /etc/nginx/nginx.conf
+      force: yes
+      remote_src: True
+    #when: first_run|changed
     
+   - name: Service nginx restart
+     service: name=nginx state=restarted
+   
    - name: node
-     shell: chdir=/root/checkbox.io/server-side/site node server.js
+     shell: chdir=/home/vagrant/checkbox.io/server-side/site node server.js
      environment:
        MONGO_PORT: 8080
        MONGO_IP: 127.0.0.1 
