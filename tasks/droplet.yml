@@ -76,6 +76,6 @@
   authorized_key:
     user: root
     state: present
-    managed_dir: yes
+    manage_dir: yes
     key: "{{ lookup('file', '/var/lib/jenkins/.ssh/id_rsa.pub') }}"
           
