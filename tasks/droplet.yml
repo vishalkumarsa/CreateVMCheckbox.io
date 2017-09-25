@@ -57,11 +57,6 @@
     groups=newdroplets
     ansible_python_interpreter=/usr/bin/python3
     
-- name: Add new droplet to authorized keys
-  authorized_key:
-    user: root
-    state: present
-    key: /var/lib/jenkins/.ssh/id_rsa.pub
     
 - name: Wait for VM to come up
   local_action: wait_for host="{{ do_droplet.droplet.ip_address }}" state=started
@@ -76,4 +71,11 @@
     size_id=512mb
     region_id=nyc1
     image_id=ubuntu-16-04-x64
+    
+- name: Add new droplet to authorized keys
+  authorized_key:
+    user: root
+    state: present
+    managed_dir: yes
+    key: "{{ lookup('file', '/var/lib/jenkins/.ssh/id_rsa.pub') }}"
           
