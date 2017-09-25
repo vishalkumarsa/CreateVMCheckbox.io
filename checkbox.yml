@@ -54,8 +54,7 @@
        #roles: readWrite,dbAdmin
        #state: present
    
-   - name: To check if git is already cloned
-     stat: path = /home/vagrant/checkbox.io
+   - stat: path = /home/vagrant/checkbox.io
      register: temp
      
    - name: Download git repo
