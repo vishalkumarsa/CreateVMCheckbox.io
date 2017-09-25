@@ -41,7 +41,6 @@
   known_hosts:
     path: /var/lib/jenkins/.ssh/known_hosts
     name: "{{ do_droplet.droplet.ip_address }}"
-    key: "{{ do_droplet.ssh_key_ids }}"
     
 - name: Wait for VM to come up
   local_action: wait_for host="{{ do_droplet.droplet.ip_address }}" state=started
