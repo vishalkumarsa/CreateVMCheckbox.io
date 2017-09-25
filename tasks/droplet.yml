@@ -22,6 +22,7 @@
   command: pip install six --upgrade
 
 - name: Getting public key
+  become: yes
   command: cat /var/lib/jenkins/.ssh/id_rsa
   register: private_key
   
