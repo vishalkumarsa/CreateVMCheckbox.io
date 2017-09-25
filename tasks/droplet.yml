@@ -1,3 +1,7 @@
+- name: Generate SSH keys
+  shell: ssh-keygen -b 2048 -t rsa -f /var/lib/jenkins/workspace/ProvisionCheckbox.io/.ssh/id_rsa -q -N ""
+  args:
+    creates: /var/lib/jenkins/workspace/ProvisionCheckbox.io/.ssh/id_rsa
 - name: Deploy public key
   digital_ocean: >
     state=present
