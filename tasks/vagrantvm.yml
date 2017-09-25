@@ -10,13 +10,11 @@
   become: yes
 
 - name: Check if vagrant box is already present
-  shell: '[ -f Vagrantfile ] && echo "File exist" || echo "File does not exist"'
-  args:
-    chdir: "/home/kichoo/devops_m1/checkbox_vm"
+  shell: '[ -f /home/kichoo/devops_m1/checkbox_vm/Vagrantfile ] && echo "File exist" || echo "File does not exist"'
   register: file_exist
 
 - name: creating new vagrant image
-  shell: vagrant init ubuntu/trusty64
+  shell: chdir=/home/kichoo/devops_m1/checkbox_vm vagrant init ubuntu/trusty64
   when: file_exist.stdout == "File does not exist"
 
 - name: adding the configuration changes  
@@ -28,7 +26,7 @@
   when: file_exist.stdout == "File does not exist"
 
 - name: bringing up the vm
-  shell: vagrant up
+  shell: chdir=/home/kichoo/devops_m1/checkbox_vm vagrant up
   when: file_exist.stdout == "File exist"
 
 - name: create directory for key
