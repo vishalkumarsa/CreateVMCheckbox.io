@@ -56,8 +56,8 @@
   register: pub_file
     #dest: /home/kichoo/devops_m1/checkbox_vm/keys/checkbox_vm.key
     #mode: 0600
-  sudo: yes
-  sudo_user: root
+  become: yes
+  become_user: root
   
 - name: creating key
   file: path=/home/kichoo/devops_m1/checkbox_vm/keys/checkbox_vm.key mode=0600 state=touch
