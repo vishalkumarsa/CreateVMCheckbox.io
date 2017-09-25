@@ -54,7 +54,7 @@ sudo: yes
 
 - name: set ssh key for checkbox vm
   command: cat /home/kichoo/checkbox_vm/.vagrant/machines/default/virtualbox/private_key
-  register: pub_file
+  register: pub_file 
     #dest: /home/kichoo/devops_m1/checkbox_vm/keys/checkbox_vm.key
     #mode: 0600
 #  become: yes
