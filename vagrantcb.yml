@@ -6,15 +6,15 @@
   vars_files:
     - vars.yml
   tasks:  
-    - include: tasks/droplet.yml
+    - include: tasks/vagrantvm.yml
 
 
 
-- hosts: newdroplets
+- hosts: nodes
   user: root      
   vars_files:
     - vars.yml
   tasks:
-    - include: tasks/software.yml
+    - include: tasks/checkbox.yml
                
 

@@ -1,0 +1,52 @@
+
+- name: Install pip
+  become: yes
+  apt: 
+    name: python-pip
+    state: present
+
+- name: create vm directory
+  file: path="{{ansible_env.HOME}}/devops_m1/checkbox_vm" state=directory
+
+- name: Check if vagrant box is already present
+  shell: '[ -f Vagrantfile ] && echo "File exist" || echo "File does not exist"'
+  args:
+    chdir: {{ansible_env.HOME}}/devops_m1/checkbox_vm
+  register: file_exist
+   
+
+- name: creating new vagrant image
+  shell: vagrant init ubuntu/trusty64
+  when: file_exist.stdout == "File does not exist"
+
+- name: adding the configuration changes  
+  blockinfile:
+    path: Vagrantfile
+    block: |2
+      config.vm.network "private_network", ip: "192.168.33.10"
+    insertafter: '# config.vm.network "private_network", ip: "192.168.33.10"'
+  when: file_exist.stdout == "File does not exist"
+
+- name: bringing up the vm
+  shell: vagrant up
+  when: file_exist.stdout == "File exist"
+
+- name: create directory for key
+  file: path={{ansible_env.HOME}}/devops_m1/checkbox_vm/keys state=directory
+
+- name: set ssh key for checkbox vm
+  copy: 
+    src: {{ansible_env.HOME}}/checkbox_vm/.vagrant/machines/default/virtualbox/private_key
+    dest: {{ansible_env.HOME}}/devops_m1/checkbox_vm/keys/checkbox_vm.key
+    mode: 0600
+
+- name: create checkbox inventory file
+  file: path={{ansible_env.HOME}}/devops_m1/checkbox_vm/inventory state=touch
+
+- name: write contents in the inventory file
+  blockinfile:
+    path: {{ansible_env.HOME}}/devops_m1/checkbox_vm/inventory 
+    block: |
+      [nodes]
+      192.168.33.10 ansible_ssh_user=vagrant ansible_ssh_private_key_file={{ansible_env.HOME}}/devops_m1/checkbox_vm/keys/checkbox_vm.key
+
