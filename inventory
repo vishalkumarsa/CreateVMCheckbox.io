@@ -1,0 +1,6 @@
+[nodes]
+192.168.33.10 ansible_ssh_user=vagrant ansible_ssh_private_key_file=/home/kichoo/checkbox_vm/.vagrant/machines/default/virtualbox/private_key
+# BEGIN ANSIBLE MANAGED BLOCK
+[nodes]
+192.168.33.10 ansible_ssh_user=vagrant ansible_ssh_private_key_file="/home/kichoo/checkbox_vm/.vagrant/machines/default/virtualbox/private_key"
+# END ANSIBLE MANAGED BLOCK
