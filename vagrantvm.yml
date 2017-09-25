@@ -62,13 +62,13 @@
     #  become_user: root
     - name: permissios on pvt key
       file:
-        path: /home/kichoo/checkbox_vm/.vagrant/machines/default/virtualbox/private_key
+        path: /home/kichoo/devops_m1/checkbox_vm/.vagrant/machines/default/virtualbox/private_key
         mode: 0777
       become: yes
       
     - name: set ssh key for checkbox vm
       become: true
-      command: "cat /home/kichoo/checkbox_vm/.vagrant/machines/default/virtualbox/private_key"
+      command: "cat /home/kichoo/devops_m1/checkbox_vm/.vagrant/machines/default/virtualbox/private_key"
       register: pub_file  
       
     - name: creating key
