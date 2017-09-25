@@ -2,51 +2,48 @@
 - hosts: nodes
   tasks:
    - name: Install git
-      apt:
-        name: git
-        state: present
+     apt:
+       name: git
+       state: present
     
-    - name: update
-      apt:
-        update_cache: yes
+   - name: update
+     apt:
+       update_cache: yes
     
-    - name: Install nodejs
-      apt:
-        name: nodejs-legacy
-        state: present
+   - name: Install nodejs
+     apt:
+       name: nodejs-legacy
+       state: present
         
-    - name: Install npm
-      apt:
-        name: npm
-        state: present
+   - name: Install npm
+     apt:
+       name: npm
+       state: present
     
-    - name: Download git repo
-      command: git clone https://github.com/vishalkumarsa/checkbox.io
+   - name: Download git repo
+     command: git clone https://github.com/vishalkumarsa/checkbox.io
     
-    - name: npm install
-      command: npm install
-      args:
-        chdir: /root/checkbox.io/server-side/site
+   - name: npm install
+     command: chdir=/root/checkbox.io/server-side/site npm install
+       
+   - name: pwd
+     command: node -v
+     register: output
     
-    - name: pwd
-      command: node -v
-      register: output
+   - name: debug
+     debug:
+       msg: "{{output.stdout}}"
     
-    - name: debug
-      debug:
-        msg: "{{output.stdout}}"
-    
-    - name: node
-      shell: node server.js
-      environment:
-        MONGO_PORT: 8080
-        MONGO_IP: 127.0.0.1 
-        MONGO_USER: mongo
-        MONGO_PASSWORD: mongo
-        MAIL_USER: mail
-        MAIL_PASSWORD: mail
-        MAIL_SMTP: 127.0.0.1:8082
-    
-      args:
-        chdir: /root/checkbox.io/server-side/site
+   - name: node
+     shell: chdir=/root/checkbox.io/server-side/site node server.js
+     environment:
+       MONGO_PORT: 8080
+       MONGO_IP: 127.0.0.1 
+       MONGO_USER: mongo
+       MONGO_PASSWORD: mongo        
+       MAIL_USER: mail
+       MAIL_PASSWORD: mail
+       MAIL_SMTP: 127.0.0.1:8082
+  
+        
     
