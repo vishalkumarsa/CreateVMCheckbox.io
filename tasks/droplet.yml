@@ -1,18 +1,3 @@
-- name: create .ssh directory
-  file:
-    path: ./.ssh
-    state: directory
-- name: Generate SSH keys
-  shell: ssh-keygen -b 2048 -t rsa -f /var/lib/jenkins/workspace/ProvisionCheckbox.io/.ssh/id_rsa -q -N ""
-  args:
-    creates: /var/lib/jenkins/workspace/ProvisionCheckbox.io/.ssh/id_rsa
-    
-- name: Set authorized key took from file
-  authorized_key:
-    user: jenkins
-    state: present
-    key: "{{ lookup('file', '/var/lib/jenkins/workspace/ProvisionCheckbox.io/.ssh/id_rsa.pub') }}"
-    
 - name: Deploy public key
   digital_ocean: >
     state=present
