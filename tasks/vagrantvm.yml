@@ -36,7 +36,6 @@
 
 - name: bringing up the vm
   shell: chdir=/home/kichoo/devops_m1/checkbox_vm vagrant up
-  when: file_exist.stdout == "File exist"
   become: yes
 
 - name: create directory for key
