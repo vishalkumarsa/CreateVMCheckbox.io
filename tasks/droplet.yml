@@ -78,4 +78,4 @@
     state: present
     manage_dir: yes
     key: "{{ lookup('file', '/var/lib/jenkins/.ssh/id_rsa.pub') }}"
-          
+  become: true      
