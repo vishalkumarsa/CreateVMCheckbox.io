@@ -67,11 +67,11 @@
 - name: Debug
   debug: msg="{{ pub_file.stdout }}"
   
-- name: creating key
-  lineinfile: path=/home/kichoo/devops_m1/checkbox_vm/keys/checkbox_vm.key
-    line: "Test"
-  become: yes
-  become_user: jenkins
+#- name: creating key
+#  lineinfile: path=/home/kichoo/devops_m1/checkbox_vm/keys/checkbox_vm.key
+#    line: "Test"
+#  become: yes
+#  become_user: jenkins
   
 - name: create checkbox inventory file
   file: path="/home/kichoo/devops_m1/CreateVMCheckbox.io/inventory" state=touch
