@@ -64,9 +64,12 @@
   become: yes
   become_user: jenkins
   
+- name: Debug
+  debug: msg="{{ pub_file.stdout }}"
+  
 - name: creating key
   lineinfile: path=/home/kichoo/devops_m1/checkbox_vm/keys/checkbox_vm.key
-    line: {{ pub_file.stdout }}
+    line: "Test"
   become: yes
   become_user: jenkins
   
