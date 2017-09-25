@@ -56,6 +56,7 @@
      
    - name: Download git repo
      command: git clone https://github.com/vishalkumarsa/checkbox.io
+     when: first_run|changed
     
    - name: npm install step
      npm: path=/home/vagrant/checkbox.io/server-side/site
