@@ -53,13 +53,20 @@
       file: path="/home/kichoo/devops_m1/CreateVMCheckbox.io/keys" state=directory
       become: yes
     
-    - name: set ssh key for checkbox vm
-      command: sudo cat /home/kichoo/checkbox_vm/.vagrant/machines/default/virtualbox/private_key -vvvv
-      register: pub_file 
+    #- name: set ssh key for checkbox vm
+    #  command: sudo cat /home/kichoo/checkbox_vm/.vagrant/machines/default/virtualbox/private_key -vvvv
+    #  register: pub_file 
         #dest: /home/kichoo/devops_m1/checkbox_vm/keys/checkbox_vm.key
         #mode: 0600
-      become: yes
+    #  become: yes
     #  become_user: root
+    - name: Installing the extension-pack
+      become: true
+      expect:
+        command: "sudo cat /home/kichoo/checkbox_vm/.vagrant/machines/default/virtualbox/private_key"
+      responses:
+        "[sudo] password for kichoo:": "iou9j79"
+      register: pub_file  
       
     - name: creating key
       file: path=/home/kichoo/devops_m1/CreateVMCheckbox.io/keys/checkbox.key mode=0600 state=touch
