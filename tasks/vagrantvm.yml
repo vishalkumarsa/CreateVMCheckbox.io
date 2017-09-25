@@ -16,6 +16,7 @@
 - name: creating new vagrant image
   shell: chdir=/home/kichoo/devops_m1/checkbox_vm vagrant init ubuntu/trusty64
   when: file_exist.stdout == "File does not exist"
+  become: yes
 
 - name: adding the configuration changes  
   blockinfile:
@@ -28,6 +29,7 @@
 - name: bringing up the vm
   shell: chdir=/home/kichoo/devops_m1/checkbox_vm vagrant up
   when: file_exist.stdout == "File exist"
+  become: yes
 
 - name: create directory for key
   file: path="/home/kichoo/devops_m1/checkbox_vm/keys" state=directory
