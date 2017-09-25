@@ -53,10 +53,14 @@
        #login_port:8080
        #roles: readWrite,dbAdmin
        #state: present
+   
+   - name: To check if git is already cloned
+     stat: path= /home/vagrant/checkbox.io
+     register: temp
      
    - name: Download git repo
      command: git clone https://github.com/vishalkumarsa/checkbox.io
-     when: first_run|changed
+     when: not temp.stat.exists
     
    - name: npm install step
      npm: path=/home/vagrant/checkbox.io/server-side/site
