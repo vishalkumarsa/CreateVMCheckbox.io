@@ -40,7 +40,6 @@
     src: "/home/kichoo/checkbox_vm/.vagrant/machines/default/virtualbox/private_key"
     dest: "/home/kichoo/devops_m1/checkbox_vm/keys/checkbox_vm.key"
     mode: 0600
-  become: yes
 
 - name: create checkbox inventory file
   file: path="/home/kichoo/devops_m1/checkbox_vm/inventory" state=touch
