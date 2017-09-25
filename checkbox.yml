@@ -50,8 +50,8 @@
        database: admin
        name: admin
        password: pass123
-       login_port:3002
-       roles: 'readWrite'
+       login_port: 3002
+       roles: readWrite,dbAdmin
        state: present
    
    - stat: path=/home/vagrant/checkbox.io
