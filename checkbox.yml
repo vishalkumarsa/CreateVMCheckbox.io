@@ -48,8 +48,8 @@
      mongodb_user:
        login_host: 127.0.0.1
        database: admin
-       name: admin
-       password: pass123
+       name: vagrant
+       password: vagrant
        login_port: 3002
        roles: readWrite,dbAdmin
        state: present
