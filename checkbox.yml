@@ -1,6 +1,12 @@
 ---
 - hosts: nodes
   tasks:
+   
+   #- name: Get credentials from vault
+     #include_vars:
+       #file: /var/lib/jenkins/secrets.yml
+       #name: vault
+        
    - name: Install git
      apt:
        name: git
