@@ -18,23 +18,31 @@
   when: file_exist.stdout == "File does not exist"
   become: yes
 
-- name: editing Vagrantfile
-  lineinfile:
-    path: Vagrantfile
-    regexp: '^end$'
-    state: absent
-  become: true
-  when: file_exist.stdout == "File does not exist"
+#- name: editing Vagrantfile
+#  lineinfile:
+#    path: Vagrantfile
+#    regexp: '^end$'
+#    state: absent
+#  become: true
+#  when: file_exist.stdout == "File does not exist"
+
+#- name: adding the configuration changes  
+#  blockinfile:
+#    path: Vagrantfile
+#    block: |
+#      config.vm.network "private_network", ip: "192.168.33.10"
+#      end
+#  when: file_exist.stdout == "File does not exist"
+#  become: yes
 
 - name: adding the configuration changes  
-  blockinfile:
-    path: Vagrantfile
-    block: |
-      config.vm.network "private_network", ip: "192.168.33.10"
-      end
+  replace:
+    path: /home/kichoo/devops_m1/checkbox_vm/Vagrantfile
+    regexp: "# config.vm.network "private_network", ip: \"192.168.33.10\""
+    replace: "config.vm.network "private_network", ip: \"192.168.33.10\""
   when: file_exist.stdout == "File does not exist"
   become: yes
-  
+
 - name: bringing up the vm
   shell: chdir=/home/kichoo/devops_m1/checkbox_vm vagrant up
   become: yes
