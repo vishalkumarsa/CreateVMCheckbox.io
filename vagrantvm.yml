@@ -20,22 +20,22 @@
       when: file_exist.stdout == "File does not exist"
       become: yes
     
-    #- name: editing Vagrantfile
-    #  lineinfile:
-    #    path: Vagrantfile
-    #    regexp: '^end$'
-    #    state: absent
-    #  become: true
-    #  when: file_exist.stdout == "File does not exist"
+    - name: editing Vagrantfile
+      lineinfile:
+        path: Vagrantfile
+        regexp: '^end$'
+        state: absent
+      become: true
+      when: file_exist.stdout == "File does not exist"
     
-    #- name: adding the configuration changes  
-    #  blockinfile:
-    #    path: Vagrantfile
-    #    block: |
-    #      config.vm.network "private_network", ip: "192.168.33.10"
-    #      end
-    #  when: file_exist.stdout == "File does not exist"
-    #  become: yes
+    - name: adding the configuration changes  
+      blockinfile:
+        path: Vagrantfile
+        block: |
+          config.vm.network "private_network", ip: "192.168.33.10"
+          end
+      when: file_exist.stdout == "File does not exist"
+      become: yes
     
     - name: adding the configuration changes  
       replace:
@@ -62,26 +62,12 @@
     #  become_user: root
       
     - name: creating key
-      file: path=/home/kichoo/devops_m1/CreateVMCheckbox.io/keys/checkbox_vm.key mode=0600 state=touch
+      file: path=/home/kichoo/devops_m1/CreateVMCheckbox.io/keys/checkbox.key mode=0600 state=touch
       become: yes
-      
+   
     #- name: Debug
     #  debug: msg="{{ pub_file.stdout }}"
       
     - name: creating key
-      lineinfile: path=/home/kichoo/devops_m1/CreateVMCheckbox.io/keys/checkbox_vm.key
-        line: "{{pub_file.stdout}}"
+      local_action: copy content={{ pub_file.stdout }} dest=/home/kichoo/devops_m1/CreateVMCheckbox.io/keys/checkbox.key
       become: yes
-      
-    - name: create checkbox inventory file
-      file: path="/home/kichoo/devops_m1/CreateVMCheckbox.io/inventory" state=touch
-      become: yes
-    
-    - name: write contents in the inventory file
-      become: yes
-      blockinfile:
-        path: "/home/kichoo/devops_m1/CreateVMCheckbox.io/inventory" 
-        block: |
-          [nodes]
-          192.168.33.10 ansible_ssh_user=vagrant ansible_ssh_private_key_file=/home/kichoo/devops_m1/CreateVMCheckbox.io/keys/checkbox_vm.key
-    
