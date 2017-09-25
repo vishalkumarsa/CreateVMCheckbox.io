@@ -6,14 +6,13 @@
     state: present
 
 - name: create vm directory
-  file: path="/home/kichoo/devops_m1/checkbox_vm" state=directory
+  file: path="/home/kichoo/devops_m1/checkbox_vm" state=directory become=yes
 
 - name: Check if vagrant box is already present
   shell: '[ -f Vagrantfile ] && echo "File exist" || echo "File does not exist"'
   args:
     chdir: "/home/kichoo/devops_m1/checkbox_vm"
   register: file_exist
-   
 
 - name: creating new vagrant image
   shell: vagrant init ubuntu/trusty64
@@ -41,7 +40,7 @@
     mode: 0600
 
 - name: create checkbox inventory file
-  file: path="/home/kichoo/devops_m1/checkbox_vm/inventory" state=touch
+  file: path="/home/kichoo/devops_m1/checkbox_vm/inventory" state=touch become=yes
 
 - name: write contents in the inventory file
   blockinfile:
