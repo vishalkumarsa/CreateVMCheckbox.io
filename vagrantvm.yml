@@ -34,7 +34,7 @@
       become: yes
     
     - name: create directory for key
-      file: path="/home/kichoo/devops_m1/CreateVMCheckbox.io/keys" state=directory
+      file: path="/home/kichoo/devops_m1/checkbox_vm/keys" state=directory
       become: yes
     
     - name: permissios on pvt key
@@ -49,9 +49,9 @@
       register: pub_file  
       
     - name: Changing key permissions
-      file: path=/home/kichoo/devops_m1/CreateVMCheckbox.io/keys/checkbox.key mode=0777 state=touch
+      file: path=/home/kichoo/devops_m1/checkbox_vm/keys/checkbox.key mode=0777 state=touch
       become: yes
       
     - name: Copying register to key file
-      local_action: copy content={{ pub_file.stdout }} dest=/home/kichoo/devops_m1/CreateVMCheckbox.io/keys/checkbox.key
+      local_action: copy content={{ pub_file.stdout }} dest=/home/kichoo/devops_m1/checkbox_vm/keys/checkbox.key
       become: yes
