@@ -43,13 +43,11 @@
       password: "ubuntu"
       roles: userAdminAnyDatabase
       state: present
-    #when: first_run|changed
 
   - name: Restart mongo db
     service:
       name: mongodb
       state: restarted
-    #when: first_run|changed
 
   - name: clone checkbox repo
     git:
@@ -75,7 +73,6 @@
     service:
       name: nginx
       state: restarted
-    #when: first_run|changed
 
   - name: npm install
     npm:
