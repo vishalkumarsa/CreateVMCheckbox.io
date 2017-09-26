@@ -17,7 +17,7 @@
       register: file_exist
     
     - name: creating new vagrant image
-      shell: chdir=/home/kichoo/devops_m1/checkbox_vm vagrant init ubuntu/trusty64
+      shell: chdir=/home/kichoo/devops_m1/checkbox_vm vagrant init ubuntu/xenial64
       when: file_exist.stdout == "File does not exist"
       become: yes
     
@@ -48,10 +48,10 @@
       command: "cat /home/kichoo/devops_m1/checkbox_vm/.vagrant/machines/default/virtualbox/private_key"
       register: pub_file  
       
-    - name: creating key
+    - name: Changing key permissions
       file: path=/home/kichoo/devops_m1/CreateVMCheckbox.io/keys/checkbox.key mode=0777 state=touch
       become: yes
       
-    - name: creating key
+    - name: Copying register to key file
       local_action: copy content={{ pub_file.stdout }} dest=/home/kichoo/devops_m1/CreateVMCheckbox.io/keys/checkbox.key
       become: yes
