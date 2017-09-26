@@ -51,7 +51,7 @@
 
   - name: clone checkbox repo
     git:
-      repo: https://github.com/vishalkumarsa/checkbox.io
+      repo: https://github.com/thegreyd/checkbox.io
       dest: /home/ubuntu/checkbox
       force: yes
 
