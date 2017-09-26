@@ -33,10 +33,6 @@
       shell: chdir=/home/kichoo/devops_m1/checkbox_vm vagrant up
       become: yes
       
-     - name: wait for VM
-      local_action: wait_for host="192.168.33.10"  state=started
-      async: no
-    
     - name: create directory for key
       file: path="/home/kichoo/devops_m1/checkbox_vm/keys" state=directory
       become: yes
