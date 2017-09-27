@@ -37,7 +37,7 @@
       file: path="/home/kichoo/devops_m1/checkbox_vm/keys" state=directory
       become: yes
     
-    - name: permissios on pvt key
+    - name: permissions on pvt key
       file:
         path: /home/kichoo/devops_m1/checkbox_vm/.vagrant/machines/default/virtualbox/private_key
         mode: 0777
