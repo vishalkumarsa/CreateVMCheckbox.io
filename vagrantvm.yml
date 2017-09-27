@@ -49,7 +49,7 @@
       register: pub_file  
       
     - name: Changing key permissions
-      file: path=/home/kichoo/devops_m1/checkbox_vm/keys/checkbox.key mode=0600 state=touch
+      file: path=/home/kichoo/devops_m1/checkbox_vm/keys/checkbox.key mode=0777 state=touch
       become: yes
       
     - name: Copying register to key file
