@@ -3,11 +3,16 @@
   become: yes
 
   tasks:
-
-  #- name: Update apt
-    #apt:
-      #update_cache: yes
-      #upgrade: dist
+  
+  - name: Get credentials using vault
+    include_vars:
+      file: secrets.yml
+      name: secrets
+   
+  - name: Update apt
+    apt:
+      update_cache: yes
+      upgrade: dist
 
   - name: Add source key for nodejs
     apt_key:
@@ -39,8 +44,8 @@
   - name: add mongo user credentials
     mongodb_user:
       database: admin
-      name: "ubuntu"
-      password: "ubuntu"
+      name: "{{secrets['mongo_user']}}"
+      password: "{{secrets['mongo_password']}}"
       roles: userAdminAnyDatabase
       state: present
 
@@ -83,8 +88,8 @@
     environment:
       MONGO_PORT: 3002
       MONGO_IP: localhost
-      MONGO_USER: "ubuntu"
-      MONGO_PASSWORD: "ubuntu"
+      MONGO_USER: "{{secrets['mongo_user']}}"
+      MONGO_PASSWORD: "{{secrets['mongo_password']}}"
 
     shell: node server.js
     async: 2592000
