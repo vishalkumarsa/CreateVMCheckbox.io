@@ -31,10 +31,10 @@
       name: "{{ item }}"
       state: present
     with_items:
-      - nginx
+      - python3-pip
       - mongodb
       - nodejs
-      - python3-pip
+      - nginx
 
   - name: install pymongo
     pip:
@@ -54,7 +54,7 @@
       name: mongodb
       state: restarted
 
-  - name: clone checkbox repo
+  - name: clone the checkbox repo during jenkins provision job
     git:
       repo: https://github.com/thegreyd/checkbox.io
       dest: /home/ubuntu/checkbox
@@ -67,14 +67,14 @@
       force: yes
       remote_src: True 
 
-  - name: configure nginx
+  - name: nginx configuration copy
     copy:
       src: /home/ubuntu/checkbox/local-conf/nginx.conf
       dest: /etc/nginx/nginx.conf
       force: yes
       remote_src: True   
 
-  - name: Restart nginx
+  - name: nginx restart
     service:
       name: nginx
       state: restarted
